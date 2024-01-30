@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { SideMenuComponent } from './side-menu/side-menu.component';
 
 @NgModule({
-  declarations: [SideMenuComponent],
+  declarations: [],
   imports: [],
-  exports: [SideMenuComponent],
+  exports: [],
 })
 export class CommonModule {}
