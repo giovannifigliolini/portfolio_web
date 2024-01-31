@@ -24,9 +24,9 @@
                       placeholder="name@example.com"
                       formControlName="email"
                     />
-                    <label for="email" class="form-label">Email</label>
-                    <div class="invalid-feedback">
-                      Please choose a username.
+                    <label for="email" class="form-label">Email*</label>
+                    <div class="invalid-feedback" *ngIf="loginForm.controls['email'].touched && loginForm.controls['email'].invalid">
+                      Inserire una email valida.
                     </div>
                   </div>
                 </div>
@@ -40,16 +40,22 @@
                       placeholder="Password"
                       formControlName="password"
                     />
-                    <label for="password" class="form-label">Password</label>
-                    <div class="invalid-feedback">
-                      Please choose a username.
+                    <label for="password" class="form-label">Password*</label>
+                    <div class="invalid-feedback" *ngIf="loginForm.controls['password'].touched && loginForm.controls['password'].invalid">
+                      Lunghezza password 8 caratteri.
                     </div>
                   </div>
                 </div>
 
+                <div class="col-12" *ngIf="errorLogin">
+                    <div class="invalid-feedback">
+                      Username o password errati. Riprovare!
+                    </div>
+                </div>
+
                 <div class="col-12">
                   <div class="d-grid">
-                    <button class="btn bsb-btn-2xl btn-primary" type="submit">
+                    <button class="btn bsb-btn-2xl btn-primary" type="submit" [disabled]="loginForm.invalid">
                       Accedi
                     </button>
                   </div>

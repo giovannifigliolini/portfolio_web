@@ -1,5 +1,7 @@
-import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -9,19 +11,28 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent {
 
-  // readonly userService = inject(UserService);
-
   loginForm !: FormGroup;
+  errorLogin = false;
 
   constructor(private userService: UserService) {
     this.loginForm = new FormGroup({
-      email: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     })
   }
 
 
   login() {
-    this.userService.createUser(this.loginForm.value.email, this.loginForm.value.password).subscribe(result => console.log(result));
+
+    this.errorLogin = false;
+
+    this.userService.login(this.loginForm.value.email, this.loginForm.value.password).pipe(
+      catchError(error => {
+        if(error.status === 401)
+        this.errorLogin = true;
+      return throwError(()=>new Error('error'))
+      })
+    ).subscribe()
+
   }
 }
