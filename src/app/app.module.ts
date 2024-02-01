@@ -9,13 +9,15 @@ import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { SideMenuComponent } from './pages/home/side-menu/side-menu.component';
+import { BackOfficeComponent } from './pages/back-office/back-office.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     LoginComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    BackOfficeComponent
   ],
   imports: [
     BrowserModule,
