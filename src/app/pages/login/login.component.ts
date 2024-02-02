@@ -32,7 +32,9 @@ export class LoginComponent {
         this.errorLogin = true;
       return throwError(()=>new Error('error'))
       })
-    ).subscribe()
+    ).subscribe(response => {
+      this.userService.setStatusAuth(response);
+    })
 
   }
 }
