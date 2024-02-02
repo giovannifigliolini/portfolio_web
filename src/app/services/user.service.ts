@@ -35,7 +35,6 @@ export class UserService {
       this.tokenTimer = this.setAuthTimer(response.expiresIn)
       const now = new Date();
       const expirationDate = new Date(now.getTime() + response.expiresIn * 1000)
-      console.log(expirationDate)
       this.saveAuthData(response.token, expirationDate)
       this.router.navigate(['/back-office']);
     }
